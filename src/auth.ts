@@ -195,6 +195,12 @@ function buildScopesFromEndpoints(
     }
   });
 
+  // Always include offline_access so Microsoft issues a refresh_token on the /token
+  // exchange. Without it, clients (Claude connector, etc.) are forced to re-authenticate
+  // every ~60 min when the access token expires. With it, sessions silently refresh for
+  // ~90 days of activity. Safe to include unconditionally — it's a standard OIDC scope.
+  scopesSet.add('offline_access');
+
   const scopes = Array.from(scopesSet);
   if (enabledToolsPattern) {
     logger.info(`Built ${scopes.length} scopes for filtered tools: ${scopes.join(', ')}`);

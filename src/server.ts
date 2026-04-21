@@ -383,10 +383,14 @@ class MicrosoftGraphServer {
         // Use our Microsoft app's client_id
         microsoftAuthUrl.searchParams.set('client_id', clientId);
 
-        // Ensure we have the minimal required scopes if none provided
-        if (!microsoftAuthUrl.searchParams.get('scope')) {
-          microsoftAuthUrl.searchParams.set('scope', 'User.Read Files.Read Mail.Read');
-        }
+        // Ensure offline_access is always requested so Microsoft issues a refresh_token.
+        // Without it, sessions die at access-token expiry (~60 min) because there's nothing
+        // to refresh with. With it, the token silently refreshes for ~90 days of activity.
+        const existingScope =
+          microsoftAuthUrl.searchParams.get('scope') || 'User.Read Files.Read Mail.Read';
+        const scopeSet = new Set(existingScope.split(/\s+/).filter(Boolean));
+        scopeSet.add('offline_access');
+        microsoftAuthUrl.searchParams.set('scope', Array.from(scopeSet).join(' '));
 
         // Redirect to Microsoft's authorization page
         res.redirect(microsoftAuthUrl.toString());
