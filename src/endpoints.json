@@ -80,6 +80,108 @@
     "workScopes": ["Mail.Read.Shared"]
   },
   {
+    "pathPattern": "/users/{user-id}/messages",
+    "method": "post",
+    "toolName": "create-shared-mailbox-draft-email",
+    "workScopes": ["Mail.ReadWrite.Shared"],
+    "llmTip": "Creates a draft in another user's mailbox. user-id is the owner's UPN or id. Prerequisite: the signed-in user must have FullAccess on the target mailbox (Admin Center → Mailbox delegation → 'Read and manage', or PowerShell: Add-MailboxPermission -AccessRights FullAccess -InheritanceType All). Outlook folder-level Delegate Access is NOT sufficient — Graph requires FullAccess. A 403 ErrorAccessDenied means FullAccess is missing. This tool only creates drafts; sending is done by the mailbox owner from Outlook."
+  },
+  {
+    "pathPattern": "/users/{user-id}/messages/{message-id}",
+    "method": "patch",
+    "toolName": "update-shared-mailbox-message",
+    "workScopes": ["Mail.ReadWrite.Shared"],
+    "llmTip": "Update a draft (or other message) in another user's mailbox. Requires FullAccess on the target mailbox — see create-shared-mailbox-draft-email for prerequisites."
+  },
+  {
+    "pathPattern": "/users/{user-id}/messages/{message-id}",
+    "method": "delete",
+    "toolName": "delete-shared-mailbox-message",
+    "workScopes": ["Mail.ReadWrite.Shared"],
+    "llmTip": "Soft delete — moves to Deleted Items in the target mailbox. Requires FullAccess on the target mailbox. To permanently delete, delete again from Deleted Items."
+  },
+  {
+    "pathPattern": "/users/{user-id}/messages/{message-id}/move",
+    "method": "post",
+    "toolName": "move-shared-mailbox-message",
+    "workScopes": ["Mail.ReadWrite.Shared"],
+    "llmTip": "Move a message between folders in another user's mailbox. destinationId accepts folder ID or well-known name (inbox, drafts, sentitems, deleteditems, junkemail, archive). Requires FullAccess on the target mailbox."
+  },
+  {
+    "pathPattern": "/users/{user-id}/mailFolders",
+    "method": "get",
+    "toolName": "list-shared-mailbox-folders",
+    "workScopes": ["Mail.Read.Shared"],
+    "llmTip": "List top-level mail folders in another user's mailbox. Requires at least Mail.Read.Shared + mailbox access on the target."
+  },
+  {
+    "pathPattern": "/users/{user-id}/mailFolders/{mailFolder-id}",
+    "method": "get",
+    "toolName": "get-shared-mailbox-folder",
+    "workScopes": ["Mail.Read.Shared"]
+  },
+  {
+    "pathPattern": "/users/{user-id}/mailFolders/{mailFolder-id}/childFolders",
+    "method": "get",
+    "toolName": "list-shared-mailbox-child-folders",
+    "workScopes": ["Mail.Read.Shared"],
+    "llmTip": "List subfolders of a mail folder in another user's mailbox. Use list-shared-mailbox-folders to find the parent folder ID."
+  },
+  {
+    "pathPattern": "/users/{user-id}/messages/{message-id}/createReply",
+    "method": "post",
+    "toolName": "create-shared-mailbox-reply-draft",
+    "workScopes": ["Mail.ReadWrite.Shared"],
+    "llmTip": "Create a reply draft to a message in another user's mailbox (does not send). The mailbox owner reviews and sends from Outlook. Requires FullAccess on the target mailbox."
+  },
+  {
+    "pathPattern": "/users/{user-id}/messages/{message-id}/createReplyAll",
+    "method": "post",
+    "toolName": "create-shared-mailbox-reply-all-draft",
+    "workScopes": ["Mail.ReadWrite.Shared"],
+    "llmTip": "Create a reply-all draft to a message in another user's mailbox (does not send). Requires FullAccess on the target mailbox."
+  },
+  {
+    "pathPattern": "/users/{user-id}/messages/{message-id}/createForward",
+    "method": "post",
+    "toolName": "create-shared-mailbox-forward-draft",
+    "workScopes": ["Mail.ReadWrite.Shared"],
+    "llmTip": "Create a forward draft of a message in another user's mailbox (does not send). Requires FullAccess on the target mailbox."
+  },
+  {
+    "pathPattern": "/users/{user-id}/messages/{message-id}/attachments",
+    "method": "get",
+    "toolName": "list-shared-mailbox-mail-attachments",
+    "workScopes": ["Mail.Read.Shared"]
+  },
+  {
+    "pathPattern": "/users/{user-id}/messages/{message-id}/attachments/{attachment-id}",
+    "method": "get",
+    "toolName": "get-shared-mailbox-mail-attachment",
+    "workScopes": ["Mail.Read.Shared"]
+  },
+  {
+    "pathPattern": "/users/{user-id}/messages/{message-id}/attachments",
+    "method": "post",
+    "toolName": "add-shared-mailbox-mail-attachment",
+    "workScopes": ["Mail.ReadWrite.Shared"],
+    "llmTip": "Max 3MB. Adds an attachment to a message/draft in another user's mailbox. Body requires @odata.type: {\"@odata.type\": \"#microsoft.graph.fileAttachment\", \"name\": \"file.pdf\", \"contentBytes\": \"<base64>\"}. For files >3MB, use create-shared-mailbox-mail-attachment-upload-session. Requires FullAccess on the target mailbox."
+  },
+  {
+    "pathPattern": "/users/{user-id}/messages/{message-id}/attachments/createUploadSession",
+    "method": "post",
+    "toolName": "create-shared-mailbox-mail-attachment-upload-session",
+    "workScopes": ["Mail.ReadWrite.Shared"],
+    "llmTip": "For large attachments (3-150MB) on a message/draft in another user's mailbox. Body: { AttachmentItem: { attachmentType: 'file', name: 'report.pdf', size: 5000000 } }. Returns a pre-authenticated uploadUrl for direct PUT of file bytes. Requires FullAccess on the target mailbox."
+  },
+  {
+    "pathPattern": "/users/{user-id}/messages/{message-id}/attachments/{attachment-id}",
+    "method": "delete",
+    "toolName": "delete-shared-mailbox-mail-attachment",
+    "workScopes": ["Mail.ReadWrite.Shared"],
+    "llmTip": "Delete an attachment from a message/draft in another user's mailbox. Requires FullAccess on the target mailbox."
+  },
+  {
     "pathPattern": "/users",
     "method": "get",
     "toolName": "list-users",

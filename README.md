@@ -141,17 +141,54 @@ account features (email, calendar, OneDrive, etc.) are available.
 
 ## Shared Mailbox Access
 
-To access shared mailboxes, you need:
+To access shared or delegated mailboxes, you need:
 
 1. **Organization mode**: Shared mailbox tools require `--org-mode` flag (work/school accounts only)
-2. **Delegated permissions**: `Mail.Read.Shared` scope
-3. **Exchange permissions**: The signed-in user must have been granted access to the shared mailbox
-4. **Usage**: Use the shared mailbox's email address as the `user-id` parameter in the shared mailbox tools
+2. **Delegated permissions**:
+   - `Mail.Read.Shared` — for read-only tools (list/get messages, folders, attachments)
+   - `Mail.ReadWrite.Shared` — for draft creation, updates, moves, deletes, and attachment writes
+3. **Exchange permissions**: The signed-in user must have **FullAccess** on the target mailbox
+4. **Usage**: Use the shared or delegated mailbox's email address as the `user-id` parameter
 
 **Finding shared mailboxes**: Use the `list-users` tool to discover available users and shared mailboxes in your
 organization.
 
 Example: `list-shared-mailbox-messages` with `user-id` set to `shared-mailbox@company.com`
+
+### Granting FullAccess (required for draft writes)
+
+Graph API's `Mail.ReadWrite.Shared` only works when the signed-in user has **FullAccess** on the target mailbox.
+Outlook's folder-level _Delegate Access_ (File → Account Settings → Delegate Access) is **not sufficient** for
+Graph-based writes — it's an Outlook-client feature that Graph does not honor.
+
+Grant FullAccess via either:
+
+- **Microsoft 365 Admin Center**: Recipients → mailbox → _Mailbox delegation_ → **Read and manage** → add the delegate.
+- **Exchange Online PowerShell**:
+  ```powershell
+  Add-MailboxPermission -Identity <mailbox> -User <delegate> -AccessRights FullAccess -InheritanceType All
+  ```
+
+This applies both to Exchange **shared mailboxes** (no license; always accessed via FullAccess) and to **delegated
+user mailboxes** (where FullAccess must be explicitly granted by the owner or admin).
+
+A `403 ErrorAccessDenied` response from any shared-mailbox write tool means FullAccess is missing on the target.
+
+### Shared-mailbox write tools
+
+These tools target another user's or a shared mailbox via `/users/{user-id}/...`:
+
+- **Drafts & messages**: `create-shared-mailbox-draft-email`, `update-shared-mailbox-message`,
+  `delete-shared-mailbox-message`, `move-shared-mailbox-message`
+- **Reply / forward drafts**: `create-shared-mailbox-reply-draft`, `create-shared-mailbox-reply-all-draft`,
+  `create-shared-mailbox-forward-draft` — all create drafts only; they do not send
+- **Attachments**: `add-shared-mailbox-mail-attachment`, `create-shared-mailbox-mail-attachment-upload-session`,
+  `list-shared-mailbox-mail-attachments`, `get-shared-mailbox-mail-attachment`,
+  `delete-shared-mailbox-mail-attachment`
+- **Folders**: `list-shared-mailbox-folders`, `list-shared-mailbox-child-folders`, `get-shared-mailbox-folder`
+
+**Sending is intentionally not supported.** Drafts created here are reviewed and sent by the mailbox owner from
+Outlook. No `Mail.Send.Shared` scope is requested.
 
 ## Quick Start Example
 
