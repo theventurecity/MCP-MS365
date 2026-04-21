@@ -24,8 +24,6 @@ type Case = { query: string; expect: string; inTop?: number };
 
 const cases: Case[] = [
   // Mail
-  { query: 'send email', expect: 'send-mail', inTop: 5 },
-  { query: 'send mail', expect: 'send-mail', inTop: 3 },
   { query: 'list unread mail', expect: 'list-mail-messages', inTop: 5 },
   { query: 'list messages', expect: 'list-mail-messages', inTop: 5 },
   { query: 'read mail message', expect: 'get-mail-message', inTop: 5 },

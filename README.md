@@ -144,7 +144,7 @@ account features (email, calendar, OneDrive, etc.) are available.
 To access shared mailboxes, you need:
 
 1. **Organization mode**: Shared mailbox tools require `--org-mode` flag (work/school accounts only)
-2. **Delegated permissions**: `Mail.Read.Shared` or `Mail.Send.Shared` scopes
+2. **Delegated permissions**: `Mail.Read.Shared` scope
 3. **Exchange permissions**: The signed-in user must have been granted access to the shared mailbox
 4. **Usage**: Use the shared mailbox's email address as the `user-id` parameter in the shared mailbox tools
 

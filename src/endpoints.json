@@ -60,13 +60,6 @@
     "scopes": ["Mail.Read"]
   },
   {
-    "pathPattern": "/me/sendMail",
-    "method": "post",
-    "toolName": "send-mail",
-    "scopes": ["Mail.Send"],
-    "llmTip": "CRITICAL: Do not try to guess the email address of the recipients. Use the list-users tool to find the email address of the recipients."
-  },
-  {
     "pathPattern": "/users/{user-id}/messages",
     "method": "get",
     "toolName": "list-shared-mailbox-messages",
@@ -85,13 +78,6 @@
     "method": "get",
     "toolName": "get-shared-mailbox-message",
     "workScopes": ["Mail.Read.Shared"]
-  },
-  {
-    "pathPattern": "/users/{user-id}/sendMail",
-    "method": "post",
-    "toolName": "send-shared-mailbox-mail",
-    "workScopes": ["Mail.Send.Shared"],
-    "llmTip": "CRITICAL: Do not try to guess the email address of the recipients. Use the list-users tool to find the email address of the recipients."
   },
   {
     "pathPattern": "/users",
@@ -159,27 +145,6 @@
     "scopes": ["Mail.ReadWrite"]
   },
   {
-    "pathPattern": "/me/messages/{message-id}/forward",
-    "method": "post",
-    "toolName": "forward-mail-message",
-    "scopes": ["Mail.Send"],
-    "llmTip": "Forward an email preserving full HTML formatting and attachments. The 'comment' field adds text above the forwarded content. toRecipients is required. Do NOT reconstruct the email manually - this endpoint handles everything server-side."
-  },
-  {
-    "pathPattern": "/me/messages/{message-id}/reply",
-    "method": "post",
-    "toolName": "reply-mail-message",
-    "scopes": ["Mail.Send"],
-    "llmTip": "Reply to an email preserving full HTML formatting. The 'comment' field is your reply text. Do NOT reconstruct the email manually."
-  },
-  {
-    "pathPattern": "/me/messages/{message-id}/replyAll",
-    "method": "post",
-    "toolName": "reply-all-mail-message",
-    "scopes": ["Mail.Send"],
-    "llmTip": "Reply-all preserving full HTML formatting. The 'comment' field is your reply text."
-  },
-  {
     "pathPattern": "/me/messages/{message-id}/createForward",
     "method": "post",
     "toolName": "create-forward-draft",
@@ -197,13 +162,6 @@
     "method": "post",
     "toolName": "create-reply-all-draft",
     "scopes": ["Mail.ReadWrite"]
-  },
-  {
-    "pathPattern": "/me/messages/{message-id}/send",
-    "method": "post",
-    "toolName": "send-draft-message",
-    "scopes": ["Mail.Send"],
-    "llmTip": "No request body needed — just call with the message ID. Draft must exist in Drafts folder."
   },
   {
     "pathPattern": "/me/mailFolders/{mailFolder-id}/messageRules",

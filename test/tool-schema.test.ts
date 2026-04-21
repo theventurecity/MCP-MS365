@@ -27,7 +27,7 @@ describe('describeToolSchema', () => {
   });
 
   it('emits JSON Schema objects (not Zod) for every parameter', () => {
-    const s = schemaFor('send-mail');
+    const s = schemaFor('create-draft-email');
     for (const p of s.parameters) {
       expect(p.schema).toBeDefined();
       expect(typeof p.schema).toBe('object');
