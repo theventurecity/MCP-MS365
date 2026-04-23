@@ -47,9 +47,6 @@ const cases: Case[] = [
   { query: 'onedrive folder', expect: 'create-onedrive-folder', inTop: 10 },
   { query: 'download file', expect: 'download-onedrive-file-content', inTop: 5 },
   { query: 'upload file', expect: 'upload-file-content', inTop: 5 },
-  // Users
-  { query: 'search users', expect: 'list-users', inTop: 10 },
-  { query: 'user manager', expect: 'get-user-manager', inTop: 10 },
   // Contacts
   { query: 'list contacts', expect: 'list-outlook-contacts', inTop: 5 },
   { query: 'create contact', expect: 'create-outlook-contact', inTop: 5 },

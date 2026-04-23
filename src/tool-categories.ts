@@ -59,12 +59,6 @@ export const TOOL_CATEGORIES: Record<string, ToolCategory> = {
     pattern: /search|query/i,
     description: 'Microsoft Search capabilities',
   },
-  users: {
-    name: 'users',
-    pattern: /user|list-users/i,
-    description: 'User directory access',
-    requiresOrgMode: true,
-  },
   all: {
     name: 'all',
     pattern: /.*/,
