@@ -10,8 +10,7 @@ function buildGeneralMcpInstructions(opts: McpInstructionsContext): string {
     'Microsoft 365 MCP exposes Microsoft Graph through MCP tools. Use each tool name, description, and parameter schema as the source of truth.',
     'Microsoft Graph OData: do not combine $filter with $search on the same request. For lists, prefer modest $top (or top) and $select; avoid very large pages unless the user needs them.',
     'Mail and message $search uses KQL; the $search query parameter value must be double-quoted per Graph (see search-query-parameter in Microsoft Graph docs).',
-    'When you need a recipient address, resolve it via existing mail/chat context (e.g., list-relevant-people, prior messages, outlook contacts); do not invent SMTP addresses.',
-    'Teams chat messages: prefer HTML contentType in the body; plain text is often mangled by Graph.',
+    'When you need a recipient address, resolve it via existing mail context (e.g., list-relevant-people, prior messages, outlook contacts); do not invent SMTP addresses.',
   ];
   if (opts.readOnly) parts.push('This server is read-only; write operations are disabled.');
   if (opts.multiAccount)

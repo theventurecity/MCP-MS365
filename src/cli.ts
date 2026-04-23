@@ -37,13 +37,13 @@ program
   )
   .option(
     '--preset <names>',
-    'Use preset tool categories (comma-separated). Available: mail, calendar, files, personal, work, excel, contacts, tasks, onenote, search, users, all'
+    'Use preset tool categories (comma-separated). Available: mail, calendar, files, personal, work, excel, contacts, search, all'
   )
   .option('--list-presets', 'List all available presets and exit')
   .option('--list-permissions', 'List all required Graph API permissions and exit')
   .option(
     '--org-mode',
-    'Enable organization/work mode from start (includes Teams, SharePoint, etc.)'
+    'Enable organization/work mode from start (includes shared mailboxes, work-account search)'
   )
   .option('--work-mode', 'Alias for --org-mode')
   .option('--force-work-scopes', 'Backwards compatibility alias for --org-mode (deprecated)')

@@ -23,15 +23,13 @@ export const TOOL_CATEGORIES: Record<string, ToolCategory> = {
   },
   personal: {
     name: 'personal',
-    pattern:
-      /mail|calendar|drive|contact|todo|onenote|attachment|draft|event|file|folder|search|query/i,
-    description:
-      'Personal productivity tools (mail, calendar, files, contacts, tasks, notes, search)',
+    pattern: /mail|calendar|drive|contact|attachment|draft|event|file|folder|search|query/i,
+    description: 'Personal productivity tools (mail, calendar, files, contacts, search)',
   },
   work: {
     name: 'work',
-    pattern: /team|channel|chat|sharepoint|planner|site|list|shared|search|query/i,
-    description: 'Organization/work tools (Teams, SharePoint, shared mailboxes, search)',
+    pattern: /shared|search|query/i,
+    description: 'Organization/work tools (shared mailboxes, search)',
     requiresOrgMode: true,
   },
   excel: {
@@ -43,16 +41,6 @@ export const TOOL_CATEGORIES: Record<string, ToolCategory> = {
     name: 'contacts',
     pattern: /contact/i,
     description: 'Outlook contacts management',
-  },
-  tasks: {
-    name: 'tasks',
-    pattern: /todo|planner|task/i,
-    description: 'Task and planning tools (To Do, Planner)',
-  },
-  onenote: {
-    name: 'onenote',
-    pattern: /onenote|notebook|section|page/i,
-    description: 'OneNote notebook operations',
   },
   search: {
     name: 'search',

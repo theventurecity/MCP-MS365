@@ -35,10 +35,6 @@ const cases: Case[] = [
   { query: 'list calendars', expect: 'list-calendars', inTop: 3 },
   { query: 'list calendar events', expect: 'list-calendar-events', inTop: 5 },
   { query: 'accept event', expect: 'accept-calendar-event', inTop: 5 },
-  // Teams
-  { query: 'list chats', expect: 'list-chats', inTop: 5 },
-  { query: 'chat messages', expect: 'list-chat-messages', inTop: 5 },
-  { query: 'send chat message', expect: 'send-chat-message', inTop: 5 },
   // Excel
   { query: 'list excel worksheets', expect: 'list-excel-worksheets', inTop: 3 },
   { query: 'excel range', expect: 'get-excel-range', inTop: 10 },
