@@ -1178,15 +1178,6 @@
     ]
   },
   {
-    "pathPattern": "/chats/{chat-id}/members",
-    "method": "get",
-    "toolName": "list-chat-members",
-    "workScopes": [
-      "ChatMember.Read"
-    ],
-    "llmTip": "Lists members of a chat. Each member has displayName, email, roles (owner/guest), and visibleHistoryStartDateTime. For meeting chats, use the chatInfo.threadId from get-online-meeting as the chat-id to see who participated in the meeting chat."
-  },
-  {
     "pathPattern": "/chats/{chat-id}/messages",
     "method": "get",
     "toolName": "list-chat-messages",
@@ -1341,24 +1332,6 @@
       "Presence.Read"
     ],
     "llmTip": "Gets the current user's presence status. Returns availability (Available, Busy, DoNotDisturb, BeRightBack, Away, Offline) and activity (InACall, InAMeeting, Presenting, OutOfOffice, etc.). Useful to check your own status before scheduling."
-  },
-  {
-    "pathPattern": "/solutions/virtualEvents/webinars/{virtualEventWebinar-id}",
-    "method": "get",
-    "toolName": "get-virtual-event-webinar",
-    "workScopes": [
-      "VirtualEvent.Read"
-    ],
-    "llmTip": "Gets a specific webinar with full details: displayName, description, startDateTime, endDateTime, audience, coOrganizers, presenters, registrationConfiguration, and status."
-  },
-  {
-    "pathPattern": "/solutions/virtualEvents/webinars/{virtualEventWebinar-id}/sessions",
-    "method": "get",
-    "toolName": "list-webinar-sessions",
-    "workScopes": [
-      "VirtualEvent.Read"
-    ],
-    "llmTip": "Lists sessions for a webinar. Each session has startDateTime, endDateTime, joinWebUrl, subject, and is essentially an online meeting associated with the webinar."
   },
   {
     "pathPattern": "/me/events/{event-id}/cancel",
